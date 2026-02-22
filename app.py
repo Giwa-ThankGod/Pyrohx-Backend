@@ -28,7 +28,7 @@ def home():
     return "Contact Mailer API Running ✅"
 
 
-@app.route("/contact", methods=["POST"])
+@app.route("/contact-form", methods=["POST"])
 def contact():
     data = request.get_json()
 
