@@ -1,0 +1,132 @@
+<!-- contact_email.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Submission - Pyrohx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #f4f7f6;
+            color: #1f2933;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        }
+
+        .header {
+            background: #0B353B;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .brand {
+            color: #41B883;
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        .content h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #0B353B;
+        }
+
+        .info-card {
+            background: #f7fbfa;
+            border-left: 4px solid #41B883;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #6b7c85;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: capitalize;
+            color: #1f2933;
+        }
+
+        .message-box {
+            background: #fff;
+            border: 1px solid #e1e8ed;
+            border-radius: 6px;
+            padding: 15px;
+            white-space: pre-line;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #8a9aa5;
+            padding: 20px;
+            background: #fafcfc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="brand">Pyrohx</span> Contact Submission</h1>
+        </div>
+        <div class="content">
+            <h2>New Contact Form Submission</h2>
+            <p>You have received a new message from the Pyrohx contact form:</p>
+            <div class="info-card">
+                <div class="info-row">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value">{fullname}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">{email}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Company</div>
+                    <div class="info-value">{company}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Message</div>
+                    <div class="message-box">{message}</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            © {year} Pyrohx. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>
