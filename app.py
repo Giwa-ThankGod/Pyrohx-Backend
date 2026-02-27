@@ -4,6 +4,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 import os
+from threading import Thread
 from datetime import datetime
 
 from utils import verify_recaptcha
@@ -24,9 +25,13 @@ mail = Mail(app)
 
 BUSINESS_EMAIL = os.getenv("BUSINESS_EMAIL")
 
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
 @app.route("/")
 def home():
-    return "Contact Mailer API Running ✅"
+    return "Contact Mailer API Running"
 
 
 @app.route("/contact-form", methods=["POST"])
@@ -63,7 +68,8 @@ def contact():
             html=html_content
         )
 
-        mail.send(msg)
+        # mail.send(msg)
+        Thread(target=send_async_email, args=(app, msg)).start()
 
         return jsonify({"success": True}), 200
 
