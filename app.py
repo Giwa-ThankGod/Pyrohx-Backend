@@ -75,6 +75,59 @@ def contact():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+        
+@app.route("/schedule-call", methods=["POST"])
+
+def schedule():
+    data = request.get_json()
+
+    fullname = data.get("fullname")
+    email = data.get("email")
+    company = data.get("company_name")
+    website = data.get("website")
+    service = data.get("service")
+    project_stage = data.get("project_stage")
+    budget_range = data.get("budget_range")
+    timeline = data.get("timeline")
+    description = data.get("description")
+
+    recaptcha_token = data.get("recaptchaToken")
+
+    if not fullname or not email or not company or not website or not service or not project_stage or not budget_range or not timeline or not description:
+        return jsonify({"error": "All fields are required"}), 400
+    
+    if not verify_recaptcha(recaptcha_token):
+        return jsonify({"error": "reCAPTCHA verification failed"}), 400
+
+    try:
+        html_content = render_template(
+            "schedule_call_email.html",
+            fullname=fullname,
+            email=email,
+            company=company,
+            website=website,
+            service=service.title(),
+            project_stage=project_stage.title(),
+            budget_range=budget_range.title(),
+            timeline=timeline.title(),
+            description=description,
+            year=datetime.now().year
+        )
+
+        msg = Message(
+            subject=f"New Scheduled Call Request from {fullname}",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[BUSINESS_EMAIL],
+            html=html_content
+        )
+
+        # mail.send(msg)
+        Thread(target=send_async_email, args=(app, msg)).start()
+
+        return jsonify({"success": True}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
